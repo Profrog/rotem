@@ -7,12 +7,20 @@ chapter_n = 3
 input = "test.pdf"
 output = "data.txt"
 split_0 = "\n\n"
+tag = 'balise'
+tag1 = 'Balise'
+
 global reader
 
 
+
+def check_tag(str0):
+   return (tag in str0) or (tag1 in str0)
+   
+   
 def store_txt(page_n, output0):
    
-   data1 = open(output0, 'a') # 추구 a로 바꿔야 함
+   data1 = open(output0, 'a',encoding = 'utf-8') # 추구 a로 바꿔야 함
    page = reader.pages[page_n]
    split_result1 = page.extract_text().split('\n')
    pattern1 = re.compile(str(chapter_n) + '([.].)+') # read one line
@@ -41,11 +49,13 @@ def store_txt(page_n, output0):
                
             for i in range(check_index+2,len(line3)):   
                storing_line += (line3[i] + " ") 
-             
-            data1.write(storing_line + split_0)
+            
+            if check_tag(storing_line): 
+             data1.write(storing_line + split_0)
                
          else:
-            data1.write(storing_line + split_0)
+            if check_tag(storing_line): 
+             data1.write(storing_line + split_0)
          
             
          storing_line = line1
@@ -53,15 +63,16 @@ def store_txt(page_n, output0):
       else: 
          storing_line += line1
 
-   data1.write(storing_line)    
+   if check_tag(storing_line): 
+      data1.write(storing_line + split_0)
    data1.close()
 
 if __name__ == '__main__':
    reader = PdfReader(input) #pdf file read_content
-   data1 = open(output, 'w')
+   data1 = open(output, 'w', encoding = 'utf-8')
    data1.close()
    
-   for i in range(22,24): #number_of_pages = len(reader.pages) #all page of pdf
+   for i in range(8,183): #number_of_pages = len(reader.pages) #all page of pdf
     store_txt(i , output)
 
 
