@@ -7,16 +7,18 @@ chapter_n = 3
 input = "test.pdf"
 output = "data.txt"
 split_0 = "\n\n"
-tag = 'balise'
-tag1 = 'Balise'
+tag = ['JRU', 'jru']
+
 
 global reader
 
-
-
 def check_tag(str0):
-   return (tag in str0) or (tag1 in str0)
    
+   for a in tag:
+      if a in str0:
+         return True
+   
+   return False
    
 def store_txt(page_n, output0):
    
