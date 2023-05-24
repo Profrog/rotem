@@ -1,13 +1,16 @@
 from PyPDF2 import PdfReader
 import re
 
+
 # page_n = 23 # current page
+global chapter_n
 chapter_n = 3
 
+global input
 input = "test.pdf"
 output = "data.txt"
 split_0 = "\n\n"
-tag = ['JRU', 'jru']
+tag = ['balise' , 'Balise', 'rbc' , 'RBC', 'trackside', 'TRACKSIDE', 'packet', 'message']
 
 
 global reader
@@ -70,13 +73,19 @@ def store_txt(page_n, output0):
    data1.close()
 
 if __name__ == '__main__':
-   reader = PdfReader(input) #pdf file read_content
+   
    data1 = open(output, 'w', encoding = 'utf-8')
    data1.close()
-   
-   for i in range(8,183): #number_of_pages = len(reader.pages) #all page of pdf
-    store_txt(i , output)
-
+  
+for chapter_n in range (1,10):
+   input = 'subset026-' + str(chapter_n) + '.pdf'  
+   reader = PdfReader(input) #pdf file read_content
+   print(input + "is start")
+    
+   for i in range(1,len(reader.pages)): #number_of_pages = len(reader.pages) #all page of pdf
+    store_txt(i , output) 
+    #reader.close()
+   print(input + "is end")
 
 
 
