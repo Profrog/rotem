@@ -15,6 +15,7 @@ tag = ['balise' , 'Balise', 'rbc' , 'RBC', 'trackside', 'TRACKSIDE', 'packet', '
 
 global reader
 
+
 def check_tag(str0):
    
    for a in tag:
