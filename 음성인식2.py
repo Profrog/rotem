@@ -7,9 +7,66 @@ eh_list2 = {'kk' :['ㄲ',12594],'gs' :['ㄳ',12595],'nj' :['ㄵ',12597],'nh' :['
 global eh_list1
 eh_list1 = {{'a' :['ㅏ',12623],'b' :['ㅂ',12610],'c' :['ㅋ',12619],'d' :['ㄷ',12599],'e' :['ㅔ',12628],'f' :['ㅍ',12621],'g' :['ㄱ',12593],'h' :['ㅎ',12622],'i' :['ㅣ',12643],'j' :['ㅈ',12616],'k' :['ㅋ',12619],'l' :['ㄹ',12601],'m' :['ㅁ',12609],'n' :['ㄴ',12596],'o' :['ㅗ',12631],'p' :['ㅍ',12621],'q' :['ㅋ',12619],'r' :['ㄹ',12601],'s' :['ㅅ',12613],'t' :['ㅌ',12620],'u' :['ㅜ',12636],'v' :['ㅂ',12610],'w' :['ㅇ',12615],'x' :['ㅅ',12613],'y' :['ㅇ',12615],'z' :['ㅈ',12616],}}
 
+#12626까지 자음
 
 'original
 {'a' :['ㅏ',12623],'b' :['ㅂ',12610],'c' :['0',0],'d' :['ㄷ',12599],'e' :['ㅔ',12628],'f' :['0',0],'g' :['ㄱ',12593],'h' :['ㅎ',12622],'i' :['ㅣ',12643],'j' :['ㅈ',12616],'k' :['ㅋ',12619],'l' :['ㄹ',12601],'m' :['ㅁ',12609],'n' :['ㄴ',12596],'o' :['ㅗ',12631],'p' :['ㅍ',12621],'q' :['0',0],'r' :['0',0],'s' :['ㅅ',12613],'t' :['ㅌ',12620],'u' :['ㅜ',12636],'v' :['0',0],'w' :['0',0],'x' :['0',0],'y' :['0',0],'z' :['0',0],}
 '
+
+global letter0
+letter0 = []
+
+string_a = input()
+string_a = string_a.lower()
+
+o_index = len(string_a)
+
+
+def check_ja_mo(flag):
+ if(flag > 12626):
+  return 2
+  
+ else:
+  return 3 
+
+
+def converge():
+ global o_index
+ cur_letter_len = 3
+ find_flag = 3
+ 
+ global letter0
+ letter00 = ['','','']
+ 
+ global string_a
+ cur_letter = string_a[o_index - cur_letter_len, o_index]
+ 
+ 
+ while(find_flag >= 0): #find_flag는 한글 index, cur_letter_len은 영어 index
+  
+  cur_letter_len = 3
+  for str0 in en_list3: #3글자 짜리 한글일 때
+   if(str0 == cur_letter):
+    find_flag = check_ja_mo(en_list3[str0][1])-1 #자음 모음 구별
+    letter00[find_flag] = en_list3[str0][0]  
+    o_index -= cur_letter_len
+    cur_letter = string_a[o_index - cur_letter_len, o_index]
+    break 
+
+if __name__ = '__main__':
+ while (o_index >=0):
+  converge()
+  	
+ 
+
+
+
+
+
+
+
+
+
+
 
 
