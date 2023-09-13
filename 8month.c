@@ -1,149 +1,159 @@
 /**
-    CopyRight ⓒ 2023. Hyundai Rotem Co., Ltd All Rights Reserved  
+    CopyRight ⓒ 2023. Hyundai Rotem Co., Ltd All Rights Reserved
 */
 /**
-    @file       Aug_Task_00.c
-    @brief      file description
-    @remark     Project - SW Coding Master Aug Task \n
-                Development Environment - PC \n
-                Language  - C \n
-    @note				과제명: 8월_방문길이 \n
+    @file       8month.c
+    @brief      This source file is CodingMaster task from September
+    @remark     Project - CodingMaster
+                Development Environment - PC
+                Language  - C
+    @note
+        2023.09.13  kmg     first Issue
 */
 
-/* includes */
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdlib.h>
-#include <string.h>
 
 /* global variables */
-const int NUM_mArrow = 4;
-const int MIN_INDEX = 0;
-const int MAX_INDEX = 11;
+static INT32 MIN_INDEX = 0;
+static INT32 MAX_INDEX = 11;
 
-int mMap[11][11][4];
-int mCurIndex[2];
-int mArrow[4][2]; /*0:U ,1:D ,2:R ,3:L */
-char mArrow_list[4];
-int mAnswer;
+/* local variables */
+INT32 iMap[11][11][4];
+INT32 iCurIndex[2];
+INT32 iArrow[4][2]; /*0:U ,1:D ,2:R ,3:L */
+CHAR iArrow_list[4];
+UINT32 iAnswer = 0U;
+
+/* includes */
+#include "MONTH_H.h"
+
+/* defines */
+#define NUM_MARROW (4)
+
+/* function declarations */
+INT32 solution(const CHAR* dirs) ;
+
+
+typedef enum index2
+{
+  Zero = 0, 
+  One, 
+  Two, 
+  Three
+} INDEX;
+
+typedef void                VOID;
+typedef unsigned int        UINT32;
 
 /* 
-@fn     bool OverSize(int *alpa)
+@fn     INT32 OverSize(INT32 *iIndex)
 @brief  로봇이 좌표 평면을 넘어갔는 지를 검사
 @param  mineName : (-5,-5) ~ (5,5) 인덱스를 벗어나면 false, 그렇지 않으면 true를 return 한다
 @return i :  false/true
 */
-bool OverSize(int *alpa)
+
+INT32 GetOverSize(INT32 *iIndex)
 {
-  bool mAnswer0 = true;  
+  INT32 iAnswer0 = 1, iAnswer1 = 1;  
       
-  if((MIN_INDEX <= alpa[0]) && (alpa[0] < MAX_INDEX))
+  if((MIN_INDEX <= iIndex[0]) && (iIndex[0] < MAX_INDEX))
   {
-    if((MIN_INDEX <= alpa[1]) && (alpa[1] < MAX_INDEX))
+    if((MIN_INDEX <= iIndex[1]) && (iIndex[1] < MAX_INDEX))
     {
-        mAnswer0 = false;
+        iAnswer0 = 0;
     }
   }
     
-  return mAnswer0;
+  return iAnswer0;
 }
 
-
-
-
 /* 
-@fn     int CheckIndex(int alpa)
+@fn     INT32 CheckIndex(INT32 alpa)
 @brief  U:0와 D:1을 서로 교환, 2:R과 3:L을 서로 교환하여 반환한다.(움직인 후,지나간 경로를 다시 밟지 않기 위함)
 @param  2*(alpa/2) + (1 - alpa%2)
 @return 2*(alpa/2) + (1 - alpa%2)
 */
-int CheckIndex(int alpa)
+
+INT32 GetCheckIndex(INT32 iReverse)
 {
-  return (2*(alpa/2)) + (1 - (alpa%2));
+  return (2*(iReverse/2)) + (1 - (iReverse%2));
 }
 
-
-
 /* 
-@fn     bool MovingMap(char alpa)
+@fn     INT32 MovingMap(CHAR cCurrentIndex)
 @brief  현재 위치에서 다음 위치로 움직이면서 지나간 위치는 value 값을 올려 기록한다.
 @param  2*(alpa/2) + (1 - alpa%2)
 @return false/true
 */
-bool MovingMap(char alpa)
+
+INT32 SetMovingMap(CHAR cCurrentIndex)
 {
-  bool mAnswer0 = false;
+  INT32 iAnswer0 = 0;
     
-  for(int Idx = 0; Idx < NUM_mArrow ;++Idx)
+  for(INT32 Idx = 0; Idx < NUM_MARROW ;++Idx)
   {
-    if(alpa == mArrow_list[Idx])
+    if(cCurrentIndex == iArrow_list[Idx])
     {
       
-      int beta[2] = {mCurIndex[0] + mArrow[Idx][0], mCurIndex[1] + mArrow[Idx][1]};
+      INT32 ibeta[2] = {iCurIndex[0] + iArrow[Idx][0], iCurIndex[1] + iArrow[Idx][1]};
     
-      if(OverSize(beta))
+      if(OverSize(ibeta))
       {
-        --mAnswer;  
+        --iAnswer;  
         break;
       }
       
       else
       {
-          if((mMap[mCurIndex[0]][mCurIndex[1]][Idx] > 0) && (mMap[beta[0]][beta[1]][CheckIndex(Idx)] > 0))
+          if((iMap[iCurIndex[0]][iCurIndex[1]][Idx] > 0) && (iMap[ibeta[0]][ibeta[1]][CheckIndex(Idx)] > 0))
           {
-            --mAnswer;
+            --iAnswer;
           }
 
-          ++mMap[mCurIndex[0]][mCurIndex[1]][Idx];
-          ++mMap[beta[0]][beta[1]][CheckIndex(Idx)];
-          mCurIndex[0] = beta[0];
-          mCurIndex[1] = beta[1];    
-          mAnswer0 =  true;
+          ++iMap[iCurIndex[0]][iCurIndex[1]][Idx];
+          ++iMap[ibeta[0]][ibeta[1]][CheckIndex(Idx)];
+          iCurIndex[0] = ibeta[0];
+          iCurIndex[1] = ibeta[1];    
+          iAnswer0 =  1;
       }
     }
   }
     
-  return mAnswer0;  
+  return iAnswer0;  
 }
 
-
 /* 
-@fn     int solution(const char* dirs)
+@fn     INT32 solution(const CHAR* dirs)
 @brief  데이터 초기화 및 하부 함수 호출 제어
 @param  mAnswer
 @return false/true
 */
-int solution(const char* dirs) {
+
+INT32 solution(const CHAR* dirs) {
     
-    mCurIndex[0] = 5;
-    mCurIndex[1] = 5;
+    iCurIndex[0] = 5;
+    iCurIndex[1] = 5;
     
-    mArrow[0][0] = 0;
-    mArrow[0][1] = 1;   
-    mArrow[1][0] = 0;
-    mArrow[1][1] = -1;
+    iArrow[0][0] = 0;
+    iArrow[0][1] = 1;   
+    iArrow[1][0] = 0;
+    iArrow[1][1] = -1;
     
-    mArrow[2][0] = 1;
-    mArrow[2][1] = 0;
-    mArrow[3][0] = -1;
-    mArrow[3][1] = 0;
+    iArrow[2][0] = 1;
+    iArrow[2][1] = 0;
+    iArrow[3][0] = -1;
+    iArrow[3][1] = 0;
         
-    mArrow_list[0] = 'U';
-    mArrow_list[1] = 'D';
-    mArrow_list[2] = 'R';
-    mArrow_list[3] = 'L';
+    iArrow_list[0] = 'U';
+    iArrow_list[1] = 'D';
+    iArrow_list[2] = 'R';
+    iArrow_list[3] = 'L';
  
-    mAnswer = (int)(strlen(dirs));
-    for(int Idx = 0; Idx < (int)(strlen(dirs));++Idx)
+    iAnswer = ((INT32)(strlen(dirs)) > 0) ? (INT32)(strlen(dirs)) : 0;
+    for(INT32 Idx = 0; Idx < (INT32)(strlen(dirs));++Idx)
     {
       MovingMap(dirs[Idx]);
     }
     
-    return mAnswer;
+    return iAnswer;
 }
 
-int main(void)
-{
-  printf("%d", solution("ULURRDLLU"));
-  return 0;
-}
