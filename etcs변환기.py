@@ -21,6 +21,10 @@ read_line = []
 global index0
 index0 = 0
 
+
+global stream_list
+stream_list = []
+
 def check_tag(str0):
    
    if(len(str0.split()) <=0):
@@ -53,8 +57,10 @@ def store_txt(page_n, output0):
       line2 = line1.split()
       
       if(len(line2) > 0 and pattern1.match(line2[0])):
-        data1.write(storing_line + "\n")
+        count = 1
+        # data1.write(storing_line + "\n")
         #print(storing_line + "\n")
+        stream_list.append(storing_line)
         storing_line = line2[0] + "$"
         
         for i in range(1,len(line2)):
@@ -64,28 +70,19 @@ def store_txt(page_n, output0):
          if(len(line2) > 1 and line2[0] == 'ERA' and line2[1] == '*'):
             count  = 0
         
-         if(count): 
-          print(line2)
-          storing_line += line1
+         if(count and len(stream_list)): 
+           stream_list[-1] += line1 
          
          if(len(line2) > 2 and line2[-2] == 'Page'):
             count = 1  
             
    # check_tag(storing_line)
    
+   stream_list.append(storing_line)
    data1.close()
 
 if __name__ == '__main__':
-   # data1 = open(output, 'r', encoding = 'utf-8')
-     
-   
-   # for i in data1:
-   #  read_line.append(i[:-1])
-    
-    
-   # read_line[-1] += '4'
-   # data1.close()
-  
+
  for chapter_n in range (7,8):
    input = 'subset026-' + str(chapter_n) + '.pdf'  
    reader = PdfReader(input) #pdf file read_content
@@ -97,7 +94,7 @@ if __name__ == '__main__':
     #reader.close()
    print(input + "is end")
    
-
  data2 = open(output2, 'w', encoding = 'utf-8')
- for a in read_line:
-   data2.write(a + "\n")    
+ for a in stream_list:
+   if(len(a) > 0 and a[0].isdigit()):
+    data2.write(a + "\n")    
