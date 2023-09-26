@@ -49,50 +49,45 @@ def store_txt(page_n, output0):
    count0 = 0 # 불필요한 절 카운트
 
    for line1 in split_result1:
+   
+      line2 = line1.split()
       
-      
-      try:
-       line2 = line1.split()
-       data1.write(line2[0] + "\n")
-     
-      except:
-       data1.write(line1 + "\n")  
-      
-   #    line2 = line1.split()
-      
-   #    if(len(line2) > 0 and pattern1.match(line2[0])):
-   #       count0 = count0 + 1
+      if(len(line2) > 0 and pattern1.match(line2[0])):
+         count0 = count0 + 1
          
-   #       if(count0 == 1):
-   #          continue
          
-   #       elif(count0 ==2):
-   #          line3 = storing_line.split()
-   #          storing_line = ''
-   #          check_index = 0
+         if(count0 == 1):
+            continue
+         
+         elif(count0 ==2):
+            line3 = storing_line.split()
+            storing_line = ''
+            check_index = 0
             
-   #          for i in range(0,len(line3)):
-   #             if(line3[i] == "Page"):
-   #               break
+            for i in range(0,len(line3)):
+               if(line3[i] == "Page"):
+                 print(line3) 
+                 break
               
-   #             check_index = check_index + 1
+               check_index = check_index + 1
                
-   #          for i in range(check_index+2,len(line3)):   
-   #             storing_line += (line3[i] + " ") 
+            for i in range(check_index+2,len(line3)):   
+               storing_line += (line3[i] + " ") 
             
-   #          check_tag(storing_line)
+            check_tag(storing_line)
           
                
-   #       else:
-   #        check_tag(storing_line)
+         else:
+          check_tag(storing_line)
          
             
-   #       storing_line = line1
+         storing_line = line1
            
-   #    else: 
-   #       storing_line += line1
+      else: 
+         storing_line += line1
 
-   # check_tag(storing_line)
+   check_tag(storing_line)
+   data1.write(storing_line + "\n")
    data1.close()
 
 if __name__ == '__main__':
@@ -118,6 +113,6 @@ if __name__ == '__main__':
    print(input + "is end")
    
 
-#data2 = open(output2, 'w', encoding = 'utf-8')
-#for a in read_line:
-   #data2.write(a + "\n")    
+ data2 = open(output2, 'w', encoding = 'utf-8')
+ for a in read_line:
+   data2.write(a + "\n")    
