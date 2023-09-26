@@ -46,48 +46,33 @@ def store_txt(page_n, output0):
    split_result1 = page.extract_text().split('\n')
    pattern1 = re.compile(str(chapter_n) + '([.].)+') # read one line
    storing_line = ''
-   count0 = 0 # 불필요한 절 카운트
+   count0 = 1 # 불필요한 절 카운트
 
    for line1 in split_result1:
    
       line2 = line1.split()
       
       if(len(line2) > 0 and pattern1.match(line2[0])):
-         count0 = count0 + 1
-         
-         
-         if(count0 == 1):
-            continue
-         
-         elif(count0 ==2):
-            line3 = storing_line.split()
-            storing_line = ''
-            check_index = 0
-            
-            for i in range(0,len(line3)):
-               if(line3[i] == "Page"):
-                 print(line3) 
-                 break
-              
-               check_index = check_index + 1
-               
-            for i in range(check_index+2,len(line3)):   
-               storing_line += (line3[i] + " ") 
-            
-            check_tag(storing_line)
-          
-               
-         else:
-          check_tag(storing_line)
-         
-            
-         storing_line = line1
+        data1.write(storing_line + "\n")
+        #print(storing_line + "\n")
+        storing_line = line2[0] + "$"
+        
+        for i in range(1,len(line2)):
+           storing_line += line2[i] + " "
            
-      else: 
-         storing_line += line1
-
-   check_tag(storing_line)
-   data1.write(storing_line + "\n")
+      else:
+         if(len(line2) > 1 and line2[0] == 'ERA' and line2[1] == '*'):
+            count  = 0
+        
+         if(count): 
+          print(line2)
+          storing_line += line1
+         
+         if(len(line2) > 2 and line2[-2] == 'Page'):
+            count = 1  
+            
+   # check_tag(storing_line)
+   
    data1.close()
 
 if __name__ == '__main__':
