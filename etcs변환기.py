@@ -57,7 +57,6 @@ def store_txt(page_n, output0):
       line2 = line1.split()
       
       if(len(line2) > 0 and pattern1.match(line2[0])):
-        count = 1
         # data1.write(storing_line + "\n")
         #print(storing_line + "\n")
         stream_list.append(storing_line)
@@ -83,8 +82,8 @@ def store_txt(page_n, output0):
 
 if __name__ == '__main__':
 
- for chapter_n in range (7,8):
-   input = 'subset026-' + str(chapter_n) + '.pdf'  
+ for chapter_n in range (1,10):
+   input = 'SUBSET-026-' + str(chapter_n) + ' v400.pdf'  
    reader = PdfReader(input) #pdf file read_content
    print(input + "is start")
     
