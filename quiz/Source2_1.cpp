@@ -202,7 +202,7 @@ public:
 
 
 
-// a_lenю╨ ╧Х©╜ aюг ╠Фюлют╢о╢ы.
+// a_lenц─б╨ б╧ц╗б©б╜ aц─ц┤ б╠ц╕ц─ц▄ц─ц■б╢ц▐б╢ц≥.
 int solution(vector<int> a) {
 	int answer = 0;
 	calcul* cal1 = new calcul(a);
