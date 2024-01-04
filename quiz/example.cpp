@@ -11,7 +11,7 @@ string* spliting(string data, char a)
 	int N = 3;
 	int data_length = data.length();
 
-	string* result = new string[N]; // ³ªÁß¿¡ Àü¹İÀûÀ¸·Î ¾µ ¼ö ÀÖ´Â °ÍÀ¸·Î º¯È¯
+	string* result = new string[N]; // ë‚˜ì¤‘ì— ì „ë°˜ì ìœ¼ë¡œ ì“¸ ìˆ˜ ìˆëŠ” ê²ƒìœ¼ë¡œ ë³€í™˜
 
 	int index = 0;
 	int result_index = 0;
