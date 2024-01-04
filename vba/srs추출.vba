@@ -14,6 +14,7 @@ Sub word_open()   ' CreateObject 사용 AP는 Application으로 됨
              Sheets(1).Paste
              Sheets(2).Cells(Count, "A").Value = Sheets(1).Cells(1, "C").Value
              Count = Count + 1
+             Application.OnKey "{Enter}"
                          
             End If
             
