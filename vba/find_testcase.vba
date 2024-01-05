@@ -1,7 +1,7 @@
 Sub find_testcase()
 
-Set where1 = Sheets(4).Range("J2:J1831")
-Set from1 = Sheets(2).Range("A2:A3")
+Set where1 = Sheets(4).Range("J2:J1832")
+Set from1 = Sheets(2).Range("A2:A1063")
 
 For Each where2 In where1.Cells
 where02 = Split(where2, Chr(10))
