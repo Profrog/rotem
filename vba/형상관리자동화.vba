@@ -35,7 +35,7 @@ Sub method_rpa(link As String)   ' CreateObject 사용 AP는 Application으로 �
     Dim title As Integer
     title = 0
     
-    Sheets(1).Range("A1") = link
+    Sheets(1).Range("E2") = link
     lastRow = Sheets(3).Cells(Rows.Count, "A").End(xlUp).Row + 1
     revesion3 = Split(Sheets(1).Cells(2, "E").Value, "_")
     Sheets(3).Cells(lastRow, "A").Value = revesion3(0) 'id(file)
