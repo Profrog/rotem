@@ -1,4 +1,3 @@
-
 Sub filling()
  With Sheets(1)
   Dim where1
@@ -16,8 +15,7 @@ Sub filling()
       beta = str2(0)
      
       If (StrComp(alpa, beta) = 0) Then
-           Data1 = Split(Sheets(2).Cells(where02.Row, "F").Value, ":")
-           .Cells(where01.Row, "B") = .Cells(where01.Row, "B") & Chr(10) & Data1(1)
+           .Cells(where01.Row, "B") = .Cells(where01.Row, "B") & Chr(10) & "TC_" & str2(1) & ":" & Sheets(2).Cells(where02.Row, "F").Value
       End If
     
     Next
@@ -25,4 +23,3 @@ Sub filling()
 
  End With
 End Sub
-
