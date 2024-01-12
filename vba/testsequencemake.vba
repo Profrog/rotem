@@ -17,6 +17,7 @@ With Sheets(3)
               For Each where03 In where3.Cells
                If (str3(0) = where03) Then
                 Sheets(1).Cells(where03.Row, "B") = Sheets(1).Cells(where03.Row, "B") & Chr(10) & "TC_" & str3(1) & " " & Sheets(2).Cells(where02.Row, "F").Value
+                Exit For
                End If
               Next
               
