@@ -1,3 +1,4 @@
+
 Sub filling2()
 With Sheets(3)
     Set where1 = .Range("E2:E1061")
@@ -15,7 +16,7 @@ With Sheets(3)
               
               Set where3 = Sheets(1).Range("A2:A195") 'a열에는 FEATURE 만 있음 EX 9990600
               For Each where03 In where3.Cells
-               If (str3(0) = where03) Then
+               If (str3(0) = CStr(where03)) Then
                 Sheets(1).Cells(where03.Row, "B") = Sheets(1).Cells(where03.Row, "B") & Chr(10) & "TC_" & str3(1) & " " & Sheets(2).Cells(where02.Row, "F").Value
                 Exit For
                End If
