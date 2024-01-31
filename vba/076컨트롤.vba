@@ -1,6 +1,6 @@
 Sub word_open()   ' CreateObject 사용 AP는 Application으로 됨
         
-    
+    Dim filea As String
     filea = Dir(ThisWorkbook.Path & "\" & "*.doc")
     take_index = 2
     
@@ -10,7 +10,7 @@ Sub word_open()   ' CreateObject 사용 AP는 Application으로 됨
         Dim Dc As Document
         Set Ap = CreateObject("Word.Application")
     
-        Set Dc = Ap.Documents.Open(filea)    ' 확장자 입력해야함.
+        Set Dc = Ap.Documents.Open(ThisWorkbook.Path & "\" & filea)    ' 확장자 입력해야함.
         Count = 1
         beta = Split(filea, "_")
         
