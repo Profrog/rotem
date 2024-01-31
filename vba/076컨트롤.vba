@@ -2,7 +2,7 @@ Sub word_open()   ' CreateObject 사용 AP는 Application으로 됨
         
     Dim filea As String
     filea = Dir(ThisWorkbook.Path & "\" & "*.doc")
-    take_index = 2
+    take_index = Sheets(3).Cells(Rows.Count, "B").End(xlUp).Row + 1
     
     Do While filea <> ""
                
